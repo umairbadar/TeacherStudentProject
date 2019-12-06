@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Find Your Instructor</string>
+    <string name="login">Login</string>
+    <string name="dont_have_an_account">Don\'t have an account? Create One.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="submit">Submit</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="telephone">Telephone</string>
+    <string name="company">Company</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">Signup</string>
+    <string name="google_place_api">AIzaSyC1B9NEEtBS8C89advaXSY3ODr1mBIxuJs</string>
+    <string name="select_course_from_below">Select Course Category from below</string>
+    <string name="select_course">Select Course</string>
+    <string name="find_teacher">Find Teacher</string>
+    <string name="ok">OK</string>
+    <string name="text_location_permission">Please enable GPS</string>
+    <string name="title_location_permission">Location Permission</string>
+    <string name="teacher_s_profile">Teacher\'s Profile</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="add_subject">Add Subject</string>
+    <string name="portfolio_details">Portfolio Details</string>
+    <string name="logout">Logout</string>
+    <string name="teacher_s_list">Teacher\'s List</string>
+</resources>
