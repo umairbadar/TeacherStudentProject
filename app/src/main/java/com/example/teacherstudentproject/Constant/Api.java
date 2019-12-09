@@ -11,5 +11,6 @@ public class Api {
     public static String CoursesCategory_URL = Base_URL + "course_categories&key=ssred1";
     public static String Courses_URL = Base_URL + "courses&key=ssred1";
     public static String TeacherListing_URL = Base_URL + "teachers&key=ssred1";
+    public static String TeacherDetail_URL = Base_URL + "teacher&key=ssred1";
 
 }

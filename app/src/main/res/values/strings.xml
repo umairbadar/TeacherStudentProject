@@ -27,4 +27,15 @@
     <string name="portfolio_details">Portfolio Details</string>
     <string name="logout">Logout</string>
     <string name="teacher_s_list">Teacher\'s List</string>
+    <string name="teacher_detail">Teacher Detail</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="country">Country</string>
+    <string name="education">Education</string>
+    <string name="bachelors">Bachelors</string>
+    <string name="specialization">Specialization</string>
+    <string name="experience">Experience</string>
+    <string name="get_directions">Get Directions</string>
+    <string name="courses">Courses</string>
+    <string name="profile">Profile</string>
 </resources>

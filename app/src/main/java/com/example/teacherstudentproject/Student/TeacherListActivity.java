@@ -35,12 +35,10 @@ import static java.security.AccessController.getContext;
 
 public class TeacherListActivity extends AppCompatActivity {
 
-    private SharedPreferences sharedPreferences;
     private String latitude, longitude;
 
     private String Course_ID;
 
-    private RecyclerView recyclerView_teachers;
     private Adapter_TeacherList adapter;
     private List<Model_TeacherList> arr_list;
 
@@ -49,7 +47,7 @@ public class TeacherListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_list);
 
-        sharedPreferences = getSharedPreferences("MyPre", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPre", MODE_PRIVATE);
         latitude = sharedPreferences.getString("latitude", "");
         longitude = sharedPreferences.getString("longitude", "");
 
@@ -73,7 +71,7 @@ public class TeacherListActivity extends AppCompatActivity {
 
     private void initView() {
 
-        recyclerView_teachers = findViewById(R.id.recyclerView_teachers);
+        RecyclerView recyclerView_teachers = findViewById(R.id.recyclerView_teachers);
         recyclerView_teachers.setLayoutManager(new GridLayoutManager(this, 1));
         arr_list = new ArrayList<>();
         adapter = new Adapter_TeacherList(arr_list, getApplicationContext());

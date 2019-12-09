@@ -1,6 +1,7 @@
 package com.example.teacherstudentproject.Student;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,10 @@ public class Adapter_TeacherList extends RecyclerView.Adapter<Adapter_TeacherLis
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, item.getID(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, TeacherDetailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("teacher_id", item.getID());
+                context.startActivity(intent);
             }
         });
     }

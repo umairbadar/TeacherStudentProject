@@ -72,7 +72,7 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.student_menu, menu);
         return true;
     }
 
@@ -88,6 +88,8 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
 
             startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
             finish();
+        } else if(id == R.id.profile){
+            Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();
         }
 
         return true;
@@ -180,8 +182,6 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
                     public void onResponse(String response) {
                         try {
                             spn_courses.setTitle("Select Courses");
-                            arr_courses_id.add("0");
-                            arr_courses.add("Select Course");
                             JSONObject jsonObject = new JSONObject(response);
                             boolean status = jsonObject.getBoolean("success");
                             if (status){
@@ -234,10 +234,10 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
             if (spn_course_cat.getSelectedItemPosition() == 0){
                 Toast.makeText(getApplicationContext(), "Select Course Category",
                         Toast.LENGTH_LONG).show();
-            } else if (spn_courses.getSelectedItemPosition() == 0) {
+            } /*else if (spn_courses.getSelectedItemPosition() == 0) {
                 Toast.makeText(getApplicationContext(), "Select Course",
                         Toast.LENGTH_LONG).show();
-            } else {
+            }*/ else {
                 Intent intent = new Intent(getApplicationContext(), TeacherListActivity.class);
                 intent.putExtra("course_id", Course_ID);
                 startActivity(intent);
