@@ -89,7 +89,9 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
             startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
             finish();
         } else if(id == R.id.profile){
-            Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(getApplicationContext(), StudentProfileActivity.class));
+            finish();
+            //Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();
         }
 
         return true;

@@ -38,4 +38,5 @@
     <string name="get_directions">Get Directions</string>
     <string name="courses">Courses</string>
     <string name="profile">Profile</string>
+    <string name="student_s_profile">Student\'s Profile</string>
 </resources>
