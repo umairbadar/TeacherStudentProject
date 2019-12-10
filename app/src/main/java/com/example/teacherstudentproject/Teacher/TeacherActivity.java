@@ -181,7 +181,7 @@ public class TeacherActivity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.tv_change_password:
                 startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
-                finish();
+                //finish();
                 break;
 
             case R.id.btn_getLocation:

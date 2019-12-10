@@ -157,8 +157,8 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
         switch(v.getId()){
 
             case R.id.tv_change_password:
-                /*startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
-                finish();*/
+                startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
+                //finish();
                 break;
 
             case R.id.btn_getLocation:

@@ -15,10 +15,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_change_password);
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
 
         startActivity(new Intent(getApplicationContext(), TeacherActivity.class));
         finish();
-    }
+    }*/
 }
