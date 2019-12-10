@@ -14,8 +14,6 @@ import com.example.teacherstudentproject.Welcome.WelcomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
-    private SharedPreferences sharedPreferences;
     private boolean saveLogin;
     private String customerGroup;
 
@@ -24,10 +22,11 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        sharedPreferences = getSharedPreferences("MyPre", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPre", MODE_PRIVATE);
         saveLogin = sharedPreferences.getBoolean("saveLogin", false);
         customerGroup = sharedPreferences.getString("customer_group", "");
 
+        int SPLASH_DISPLAY_LENGTH = 2000;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -44,8 +44,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:text="Syed Faisal Ali"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="@string/syed_faisal_ali"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 
@@ -66,8 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:text="instructor@appedology.com"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="@string/instructor_appedology_com"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 
@@ -88,8 +90,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:text="0313134567"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="@string/_0313134567"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 
@@ -110,8 +113,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:text="Pakistan"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="@string/pakistan"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 
@@ -132,8 +136,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:text="Karachi"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="@string/karachi"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 
@@ -154,9 +159,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
             android:singleLine="false"
-            android:text="Gulshan-e-Iqbal"
+            android:text="@string/gulshan_e_iqbal"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 
@@ -177,7 +183,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
             android:text="@string/bachelors"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
@@ -199,8 +206,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:text="Network and security"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="@string/network_and_security"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 
@@ -221,8 +229,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:text="4 years"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="@string/_4_years"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 
@@ -243,8 +252,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:paddingLeft="10dp"
-            android:text="Maths, English"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:text="@string/maths_english"
             android:textSize="18sp"
             android:background="@drawable/tv_border"/>
 

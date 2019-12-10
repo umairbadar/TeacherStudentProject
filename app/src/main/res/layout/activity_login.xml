@@ -40,20 +40,22 @@
             android:padding="10dp"
             android:inputType="textEmailAddress"
             android:imeOptions="actionNext"
-            android:drawableLeft="@drawable/ic_email"
-            android:drawablePadding="5dp"/>
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="5dp"
+            android:autofillHints="@string/email" />
 
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:padding="10dp"
-            android:inputType="textPassword"
-            android:imeOptions="actionDone"
             android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/ic_password"
-            android:drawablePadding="5dp"/>
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="5dp"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:autofillHints="@string/password" />
 
         <Button
             android:id="@+id/btn_login"

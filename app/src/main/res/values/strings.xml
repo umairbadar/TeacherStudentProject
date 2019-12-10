@@ -39,4 +39,13 @@
     <string name="courses">Courses</string>
     <string name="profile">Profile</string>
     <string name="student_s_profile">Student\'s Profile</string>
+    <string name="syed_faisal_ali">Syed Faisal Ali</string>
+    <string name="instructor_appedology_com">instructor@appedology.com</string>
+    <string name="_0313134567">0313134567</string>
+    <string name="pakistan">Pakistan</string>
+    <string name="karachi">Karachi</string>
+    <string name="gulshan_e_iqbal">Gulshan-e-Iqbal</string>
+    <string name="network_and_security">Network and security</string>
+    <string name="_4_years">4 years</string>
+    <string name="maths_english">Maths, English</string>
 </resources>
