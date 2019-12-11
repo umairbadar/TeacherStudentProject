@@ -75,6 +75,9 @@ public class TeacherActivity extends AppCompatActivity implements View.OnClickLi
 
             startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
             finish();
+        } else if (id == R.id.add_subject){
+            startActivity(new Intent(getApplicationContext(), AddSubjectActivity.class));
+            finish();
         }
 
         return true;

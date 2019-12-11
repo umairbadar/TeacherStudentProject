@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Student.StudentProfileActivity"></activity>
+        <activity android:name=".Teacher.AddSubjectActivity"></activity>
+        <activity android:name=".Teacher.PortfolioDetailsActivity" />
+        <activity android:name=".Student.StudentProfileActivity" />
         <activity android:name=".Student.TeacherDetailActivity" />
         <activity android:name=".Teacher.ChangePasswordActivity" />
         <activity android:name=".Student.TeacherListActivity" />

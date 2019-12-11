@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                 JSONObject obj = innerObj.getJSONObject("address");
 
+                                editor.putString("address_id", obj.getString("address_id"));
                                 editor.putString("address", obj.getString("address_1"));
                                 editor.putString("latitude", obj.getString("latitude"));
                                 editor.putString("longitude", obj.getString("longitude"));
