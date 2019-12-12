@@ -138,6 +138,7 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
         intent.putExtra("course_id", Course_ID);
         startActivity(intent);
         finish();
+
     }
 
     private void initViews(){
