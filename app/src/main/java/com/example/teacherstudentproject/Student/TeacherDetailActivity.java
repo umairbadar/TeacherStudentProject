@@ -3,7 +3,10 @@ package com.example.teacherstudentproject.Student;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.teacherstudentproject.Constant.Api;
+import com.example.teacherstudentproject.Login.LoginActivity;
 import com.example.teacherstudentproject.R;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +39,9 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
             tv_experience, tv_courses;
 
     private String Teacher_ID, lat = "", lng = "";
+
+    //Loader
+    private KProgressHUD loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,11 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
 
     private void initViews() {
 
+        loader = KProgressHUD.create(TeacherDetailActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(R.color.blue)
+                .setCancellable(false);
+
         tv_name = findViewById(R.id.tv_name);
         tv_email = findViewById(R.id.tv_email);
         tv_phone = findViewById(R.id.tv_phone);
@@ -65,9 +78,23 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
         tv_experience = findViewById(R.id.tv_experience);
         tv_courses = findViewById(R.id.tv_courses);
 
-        //Fetching Details of teacher
-        getDetails();
+        //Checking if Internet is connected or not
+        isNetworkAvailable();
     }
+    private void isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null, otherwise check if we are connected
+        if (networkInfo != null && networkInfo.isConnected()) {
+            //Fetching Details of teacher
+            getDetails();
+        } else if (networkInfo == null) {
+            Toast.makeText(getApplicationContext(),R.string.no_internet_msg,
+                    Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 
     private void getDirections(){
         if (!lat.equals("") && !lng.equals("")) {
@@ -79,6 +106,8 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
 
     private void getDetails() {
 
+        loader.show();
+
         StringRequest req = new StringRequest(Request.Method.POST, Api.TeacherDetail_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -87,6 +116,7 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
                             JSONObject jsonObject = new JSONObject(response);
                             boolean status = jsonObject.getBoolean("success");
                             if (status) {
+                                loader.dismiss();
 
                                 JSONObject innerObj = jsonObject.getJSONObject("teacher");
                                 String name = innerObj.getString("firstname") + " " + innerObj.getString("lastname");
@@ -116,6 +146,7 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
                                 tv_courses.setText(courses);
 
                             } else {
+                                loader.dismiss();
                                 Toast.makeText(getApplicationContext(), jsonObject.getString("error"),
                                         Toast.LENGTH_LONG).show();
                             }
@@ -127,6 +158,7 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.dismiss();
                         Toast.makeText(getApplicationContext(), error.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }

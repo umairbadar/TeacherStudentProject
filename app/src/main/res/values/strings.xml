@@ -50,5 +50,6 @@
     <string name="maths_english">Maths, English</string>
     <string name="didn_t_find_your_course_in_the_list_add_it_here">Didn\'t find your course in the list? \nAdd it here!</string>
     <string name="add_course">Add Course</string>
+    <string name="no_internet_msg">Opppss!!\nIt seems that you haven\'t connected to the Internet.</string>
 
 </resources>

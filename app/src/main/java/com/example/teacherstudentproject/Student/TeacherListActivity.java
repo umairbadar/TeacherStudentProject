@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -19,7 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.teacherstudentproject.Constant.Api;
+import com.example.teacherstudentproject.Login.LoginActivity;
 import com.example.teacherstudentproject.R;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +39,9 @@ import java.util.Objects;
 import static java.security.AccessController.getContext;
 
 public class TeacherListActivity extends AppCompatActivity {
+
+    //Loader
+    private KProgressHUD loader;
 
     private String latitude, longitude;
 
@@ -71,15 +79,35 @@ public class TeacherListActivity extends AppCompatActivity {
 
     private void initView() {
 
+        loader = KProgressHUD.create(TeacherListActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(R.color.blue)
+                .setCancellable(false);
+
         RecyclerView recyclerView_teachers = findViewById(R.id.recyclerView_teachers);
         recyclerView_teachers.setLayoutManager(new GridLayoutManager(this, 1));
         arr_list = new ArrayList<>();
         adapter = new Adapter_TeacherList(arr_list, getApplicationContext());
         recyclerView_teachers.setAdapter(adapter);
-        getTeachers();
+        isNetworkAvailable();
+    }
+    private void isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null, otherwise check if we are connected
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            getTeachers();
+        } else if (networkInfo == null) {
+            Toast.makeText(getApplicationContext(),R.string.no_internet_msg,
+                    Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void getTeachers() {
+
+        loader.show();
 
         StringRequest req = new StringRequest(Request.Method.POST, Api.TeacherListing_URL,
                 new Response.Listener<String>() {
@@ -89,6 +117,7 @@ public class TeacherListActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean status = jsonObject.getBoolean("success");
                             if (status) {
+                                loader.dismiss();
                                 JSONArray jsonArray = jsonObject.getJSONArray("teachers");
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
@@ -105,6 +134,7 @@ public class TeacherListActivity extends AppCompatActivity {
                                 }
                                 adapter.notifyDataSetChanged();
                             } else {
+                                loader.dismiss();
                                 Toast.makeText(getApplicationContext(), jsonObject.getString("error"),
                                         Toast.LENGTH_LONG).show();
                             }
@@ -116,6 +146,7 @@ public class TeacherListActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.dismiss();
                         Toast.makeText(getApplicationContext(), error.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }

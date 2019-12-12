@@ -5,9 +5,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -36,6 +39,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
@@ -51,6 +55,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //Loader
+    private KProgressHUD loader;
 
     //Location
     private String lattitude, longitude;
@@ -95,6 +102,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initViews() {
+
+        loader = KProgressHUD.create(SignupActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(R.color.blue)
+                .setCancellable(false);
 
         spn_state = findViewById(R.id.spn_state);
         arr_states = new ArrayList<>();
@@ -402,6 +414,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void registerUser() {
 
+        loader.show();
+
         StringRequest req = new StringRequest(Request.Method.POST, Api.Signup_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -411,10 +425,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             boolean status = jsonObject.getBoolean("success");
                             String msg = jsonObject.getString("data");
                             if (status) {
+                                loader.dismiss();
                                 Toast.makeText(getApplicationContext(), "Please Login to continue",
                                         Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             } else {
+                                loader.dismiss();
                                 Toast.makeText(getApplicationContext(), msg,
                                         Toast.LENGTH_LONG).show();
                             }
@@ -427,6 +443,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.dismiss();
                         Toast.makeText(getApplicationContext(), error.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
@@ -454,13 +471,27 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         requestQueue.add(req);
     }
 
+    private void isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null, otherwise check if we are connected
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            validation();
+        } else if (networkInfo == null) {
+            Toast.makeText(getApplicationContext(),R.string.no_internet_msg,
+                    Toast.LENGTH_LONG).show();
+        }
+
+    }
+
     @Override
     public void onClick(View view) {
 
         if (view.getId() == R.id.btn_getLocation) {
             checkLocationPermission();
         } else if (view.getId() == R.id.btn_signup) {
-            validation();
+            isNetworkAvailable();
         }
     }
 }

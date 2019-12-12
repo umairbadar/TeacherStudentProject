@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,8 +27,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.teacherstudentproject.Constant.Api;
+import com.example.teacherstudentproject.Login.LoginActivity;
 import com.example.teacherstudentproject.R;
 import com.example.teacherstudentproject.Welcome.WelcomeActivity;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
@@ -39,6 +44,9 @@ import java.util.Objects;
 
 public class SelectCoursesActivity extends AppCompatActivity implements View.OnClickListener {
 
+
+    //Loader
+    private KProgressHUD loader;
 
     private SharedPreferences sharedPreferences;
 
@@ -97,7 +105,33 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
         return true;
     }
 
+    private void isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null, otherwise check if we are connected
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+           callNextActivity();
+        } else if (networkInfo == null) {
+            Toast.makeText(getApplicationContext(),R.string.no_internet_msg,
+                    Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void callNextActivity(){
+        Intent intent = new Intent(getApplicationContext(), TeacherListActivity.class);
+        intent.putExtra("course_id", Course_ID);
+        startActivity(intent);
+        finish();
+    }
+
     private void initViews(){
+
+        loader = KProgressHUD.create(SelectCoursesActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(R.color.blue)
+                .setCancellable(false);
 
         //Course Category
         spn_course_cat = findViewById(R.id.spn_course_cat);
@@ -140,11 +174,14 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
 
     private void getCoursesCategory(){
 
+        loader.show();
+
         StringRequest req = new StringRequest(Request.Method.GET, Api.CoursesCategory_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            loader.dismiss();
                             arr_courses_cat_id.add("0");
                             arr_courses_cat.add("Select Course Category");
                             JSONObject jsonObject = new JSONObject(response);
@@ -164,6 +201,7 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.dismiss();
                         Toast.makeText(getApplicationContext(), error.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
@@ -236,14 +274,8 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
             if (spn_course_cat.getSelectedItemPosition() == 0){
                 Toast.makeText(getApplicationContext(), "Select Course Category",
                         Toast.LENGTH_LONG).show();
-            } /*else if (spn_courses.getSelectedItemPosition() == 0) {
-                Toast.makeText(getApplicationContext(), "Select Course",
-                        Toast.LENGTH_LONG).show();
-            }*/ else {
-                Intent intent = new Intent(getApplicationContext(), TeacherListActivity.class);
-                intent.putExtra("course_id", Course_ID);
-                startActivity(intent);
-                finish();
+            }  else {
+                isNetworkAvailable();
             }
         }
     }

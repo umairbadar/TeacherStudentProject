@@ -37,4 +37,7 @@ dependencies {
 
     //MultiSelect Spinner With Searchable
     implementation 'com.github.pratikbutani:MultiSelectSpinner:-SNAPSHOT'
+
+    //Loader
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
 }

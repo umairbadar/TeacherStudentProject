@@ -3,9 +3,11 @@ package com.example.teacherstudentproject.Login;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.example.teacherstudentproject.R;
 import com.example.teacherstudentproject.Student.SelectCoursesActivity;
 import com.example.teacherstudentproject.Teacher.TeacherActivity;
 import com.example.teacherstudentproject.Welcome.WelcomeActivity;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +41,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
+    //Loader
+    private KProgressHUD loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void initViews() {
 
+        loader = KProgressHUD.create(LoginActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(R.color.blue)
+                .setCancellable(false);
+
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
     }
@@ -68,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void loginUser() {
 
+        loader.show();
         StringRequest req = new StringRequest(Request.Method.POST, Api.Login_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -76,6 +88,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             JSONObject jsonObject = new JSONObject(response);
                             boolean status = jsonObject.getBoolean("success");
                             if (status) {
+                                loader.dismiss();
+
                                 JSONObject innerObj = jsonObject.getJSONObject("data");
 
                                 String customerGroup = innerObj.getString("customer_group_id");
@@ -87,6 +101,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("lastname", innerObj.getString("lastname"));
                                 editor.putString("email", innerObj.getString("email"));
                                 editor.putString("telephone", innerObj.getString("telephone"));
+                                editor.putString("portfolio", innerObj.getString("portfolio"));
+                                editor.putString("experience", innerObj.getString("experience"));
+                                editor.putString("education", innerObj.getString("education"));
+                                editor.putString("specialization", innerObj.getString("specialization"));
 
                                 JSONObject obj = innerObj.getJSONObject("address");
 
@@ -111,6 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
 
                             } else {
+                                loader.dismiss();
                                 Toast.makeText(getApplicationContext(), "Invalid Email and Password",
                                         Toast.LENGTH_LONG).show();
                             }
@@ -122,6 +141,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.dismiss();
                         Toast.makeText(getApplicationContext(), error.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
@@ -158,14 +178,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null, otherwise check if we are connected
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            validation();
+        } else if (networkInfo == null) {
+            Toast.makeText(getApplicationContext(),R.string.no_internet_msg,
+                    Toast.LENGTH_LONG).show();
+        }
+
+    }
+
     @Override
     public void onClick(View view) {
 
         if (view.getId() == R.id.btn_login) {
-            validation();
-            /*Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse("http://maps.google.com/maps?daddr=24.9180,67.0971"));
-            startActivity(intent);*/
+            isNetworkAvailable();
         }
     }
 }
