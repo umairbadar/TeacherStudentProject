@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("portfolio", innerObj.getString("portfolio"));
                                 editor.putString("experience", innerObj.getString("experience"));
                                 editor.putString("education", innerObj.getString("education"));
+                                editor.putString("education_no", innerObj.getString("education_no"));
                                 editor.putString("specialization", innerObj.getString("specialization"));
 
                                 JSONObject obj = innerObj.getJSONObject("address");

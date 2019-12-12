@@ -105,6 +105,20 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
         return true;
     }
 
+    private void isInternetAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null, otherwise check if we are connected
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            getCoursesCategory();
+        } else if (networkInfo == null) {
+            Toast.makeText(getApplicationContext(),R.string.no_internet_msg,
+                    Toast.LENGTH_LONG).show();
+        }
+
+    }
+
     private void isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -137,7 +151,7 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
         spn_course_cat = findViewById(R.id.spn_course_cat);
         arr_courses_cat = new ArrayList<>();
         arr_courses_cat_id = new ArrayList<>();
-        getCoursesCategory();
+        isInternetAvailable();
 
         spn_course_cat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
