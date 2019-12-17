@@ -1,4 +1,4 @@
-package com.example.teacherstudentproject.Student;
+package com.example.teacherstudentproject.student;
 
 public class Model_TeacherList {
 

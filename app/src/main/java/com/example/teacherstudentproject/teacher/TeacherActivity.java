@@ -1,5 +1,6 @@
-package com.example.teacherstudentproject.Student;
+package com.example.teacherstudentproject.teacher;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,6 +15,9 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,10 +29,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.teacherstudentproject.Constant.Api;
+import com.example.teacherstudentproject.endpoints.Api;
 import com.example.teacherstudentproject.R;
-import com.example.teacherstudentproject.Teacher.ChangePasswordActivity;
-import com.example.teacherstudentproject.Teacher.TeacherActivity;
+import com.example.teacherstudentproject.welcome.WelcomeActivity;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -42,7 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class StudentProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class TeacherActivity extends AppCompatActivity implements View.OnClickListener {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -57,24 +60,56 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
     private EditText et_first_name, et_last_name, et_email, et_telephone, et_address, et_city;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_profile);
-
-        sharedPreferences = getSharedPreferences("MyPre", MODE_PRIVATE);
+        setContentView(R.layout.activity_teacher);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
+        sharedPreferences = getSharedPreferences("MyPre", MODE_PRIVATE);
+
         //Initializing Views
         initViews();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.logout) {
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+
+            startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
+            finish();
+        } else if (id == R.id.add_subject) {
+            startActivity(new Intent(getApplicationContext(), CoursesActivity.class));
+            finish();
+        } else if (id == R.id.portfolio) {
+            startActivity(new Intent(getApplicationContext(), PortfolioDetailsActivity.class));
+            finish();
+        }
+
+        return true;
     }
 
     private void initViews() {
 
-        loader = KProgressHUD.create(StudentProfileActivity.this)
+        loader = KProgressHUD.create(TeacherActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setBackgroundColor(R.color.blue)
                 .setCancellable(false);
@@ -102,6 +137,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
         overridePendingTransition(0, 0);
         startActivity(intent);
     }
+
 
     private void updateProfile(final String lat, final String lng) {
 
@@ -174,12 +210,6 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), SelectCoursesActivity.class));
-        finish();
-    }
-
     public void checkLocationPermission() {
 
         if (ContextCompat.checkSelfPermission(this,
@@ -189,13 +219,13 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                ActivityCompat.requestPermissions(StudentProfileActivity.this,
+                ActivityCompat.requestPermissions(TeacherActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
 
 
             } else {
-                ActivityCompat.requestPermissions(StudentProfileActivity.this,
+                ActivityCompat.requestPermissions(TeacherActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
@@ -203,7 +233,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
             try {
-                startActivityForResult(builder.build(StudentProfileActivity.this), PLACE_PICKER_REQUEST);
+                startActivityForResult(builder.build(TeacherActivity.this), PLACE_PICKER_REQUEST);
             } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
                 e.printStackTrace();
             }
@@ -227,7 +257,7 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
 
                     PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
                     try {
-                        startActivityForResult(builder.build(StudentProfileActivity.this), PLACE_PICKER_REQUEST);
+                        startActivityForResult(builder.build(TeacherActivity.this), PLACE_PICKER_REQUEST);
                     } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
                         e.printStackTrace();
                     }
@@ -298,6 +328,5 @@ public class StudentProfileActivity extends AppCompatActivity implements View.On
                 break;
 
         }
-
     }
 }

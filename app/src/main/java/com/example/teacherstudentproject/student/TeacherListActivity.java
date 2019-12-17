@@ -1,9 +1,8 @@
-package com.example.teacherstudentproject.Student;
+package com.example.teacherstudentproject.student;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -21,8 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.teacherstudentproject.Constant.Api;
-import com.example.teacherstudentproject.Login.LoginActivity;
+import com.example.teacherstudentproject.endpoints.Api;
 import com.example.teacherstudentproject.R;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -35,8 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import static java.security.AccessController.getContext;
 
 public class TeacherListActivity extends AppCompatActivity {
 

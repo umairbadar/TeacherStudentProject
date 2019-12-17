@@ -1,12 +1,10 @@
-package com.example.teacherstudentproject.Signup;
+package com.example.teacherstudentproject.signup;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -31,10 +29,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.teacherstudentproject.Constant.Api;
-import com.example.teacherstudentproject.Login.LoginActivity;
+import com.example.teacherstudentproject.endpoints.Api;
+import com.example.teacherstudentproject.login.LoginActivity;
 import com.example.teacherstudentproject.R;
-import com.example.teacherstudentproject.Welcome.WelcomeActivity;
+import com.example.teacherstudentproject.welcome.WelcomeActivity;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -46,11 +44,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 

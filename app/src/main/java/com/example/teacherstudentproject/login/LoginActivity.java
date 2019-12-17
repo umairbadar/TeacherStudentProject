@@ -1,4 +1,4 @@
-package com.example.teacherstudentproject.Login;
+package com.example.teacherstudentproject.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,11 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.teacherstudentproject.Constant.Api;
+import com.example.teacherstudentproject.endpoints.Api;
 import com.example.teacherstudentproject.R;
-import com.example.teacherstudentproject.Student.SelectCoursesActivity;
-import com.example.teacherstudentproject.Teacher.TeacherActivity;
-import com.example.teacherstudentproject.Welcome.WelcomeActivity;
+import com.example.teacherstudentproject.student.SelectCoursesActivity;
+import com.example.teacherstudentproject.teacher.TeacherActivity;
+import com.example.teacherstudentproject.welcome.WelcomeActivity;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONException;

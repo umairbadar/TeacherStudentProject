@@ -1,4 +1,4 @@
-package com.example.teacherstudentproject.Student;
+package com.example.teacherstudentproject.student;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,10 +26,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.teacherstudentproject.Constant.Api;
-import com.example.teacherstudentproject.Login.LoginActivity;
+import com.example.teacherstudentproject.endpoints.Api;
 import com.example.teacherstudentproject.R;
-import com.example.teacherstudentproject.Welcome.WelcomeActivity;
+import com.example.teacherstudentproject.welcome.WelcomeActivity;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 

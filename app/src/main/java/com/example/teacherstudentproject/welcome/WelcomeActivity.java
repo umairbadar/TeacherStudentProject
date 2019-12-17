@@ -1,15 +1,14 @@
-package com.example.teacherstudentproject.Welcome;
+package com.example.teacherstudentproject.welcome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Switch;
 
-import com.example.teacherstudentproject.Login.LoginActivity;
+import com.example.teacherstudentproject.login.LoginActivity;
 import com.example.teacherstudentproject.R;
-import com.example.teacherstudentproject.Signup.SignupActivity;
+import com.example.teacherstudentproject.signup.SignupActivity;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 

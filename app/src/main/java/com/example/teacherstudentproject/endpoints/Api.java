@@ -1,4 +1,4 @@
-package com.example.teacherstudentproject.Constant;
+package com.example.teacherstudentproject.endpoints;
 
 public class Api {
 
@@ -13,5 +13,8 @@ public class Api {
     public static String TeacherListing_URL = Base_URL + "teachers&key=ssred1";
     public static String TeacherDetail_URL = Base_URL + "teacher&key=ssred1";
     public static String UpdateProfile_URL = Base_URL + "edit_profile&key=ssred1";
+    public static String ChangePassword_URL = Base_URL + "change_password&key=ssred1";
+    public static String SelectedCourses_URL = Base_URL + "user_selected_courses&key=ssred1";
+    public static String NonSelectedCourses_URL = Base_URL + "user_non_selected_courses&key=ssred1";
 
 }

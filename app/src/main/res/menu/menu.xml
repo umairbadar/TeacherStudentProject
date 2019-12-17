@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/add_subject"
-        android:title="@string/add_course"
+        android:title="@string/courses"
         app:showAsAction="never" />
 
     <item

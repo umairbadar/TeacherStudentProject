@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Teacher.AddSubjectActivity">
+    tools:context=".teacher.AddNewCourseActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/add_course"
+            android:text="@string/add_new_course"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:typeface="monospace" />
@@ -37,35 +36,49 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            android:text="@string/add_course"
+            android:text="@string/add_new_course"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:typeface="serif" />
 
-        <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
-            android:id="@+id/spinner"
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spn_courses_cat"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            app:hintText="Select Courses"/>
+            android:layout_marginTop="10dp" />
 
-        <TextView
+        <EditText
+            android:id="@+id/et_subject_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="16sp"
-            android:text="@string/didn_t_find_your_course_in_the_list_add_it_here"
-            android:textColor="@color/blue"
-            android:gravity="center"
-            android:typeface="serif" />
+            android:hint="@string/subject_name"
+            android:padding="10dp"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:autofillHints="@string/subject_name"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/et_course_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/course_name"
+            android:padding="10dp"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:autofillHints="@string/course_name" />
 
         <Button
+            android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/submit"
             android:background="@color/blue"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:onClick="onClick"/>
 
     </LinearLayout>
 

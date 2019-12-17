@@ -53,5 +53,11 @@
     <string name="no_internet_msg">Opppss!!\nIt seems that you haven\'t connected to the Internet.</string>
     <string name="portfolio">Portfolio</string>
     <string name="update_portfolio">Update Portfolio</string>
+    <string name="add_new_course">Add New Course</string>
+    <string name="subject_name">Subject Name</string>
+    <string name="course_name">Course Name</string>
+    <string name="selected_courses">Selected Courses</string>
+    <string name="old_password">Old Password</string>
+    <string name="save_list">Save list</string>
 
 </resources>

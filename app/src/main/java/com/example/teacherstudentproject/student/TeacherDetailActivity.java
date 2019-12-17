@@ -1,4 +1,4 @@
-package com.example.teacherstudentproject.Student;
+package com.example.teacherstudentproject.student;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,8 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.teacherstudentproject.Constant.Api;
-import com.example.teacherstudentproject.Login.LoginActivity;
+import com.example.teacherstudentproject.endpoints.Api;
 import com.example.teacherstudentproject.R;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -131,7 +130,7 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
                                 tv_experience.setText(innerObj.getString("experience"));
                                 lat = innerObj.getString("latitude");
                                 lng = innerObj.getString("longitude");
-                                JSONArray jsonArray = innerObj.getJSONArray("courses");
+                                JSONArray jsonArray = innerObj.getJSONArray("activity_courses");
                                 StringBuilder stringBuilder = new StringBuilder();
                                 for (int i = 0; i < jsonArray.length(); i++){
                                     JSONObject obj = jsonArray.getJSONObject(i);

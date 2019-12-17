@@ -1,4 +1,4 @@
-package com.example.teacherstudentproject.Splash;
+package com.example.teacherstudentproject.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +7,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.teacherstudentproject.Student.SelectCoursesActivity;
-import com.example.teacherstudentproject.Teacher.TeacherActivity;
+import com.example.teacherstudentproject.student.SelectCoursesActivity;
+import com.example.teacherstudentproject.teacher.TeacherActivity;
 import com.example.teacherstudentproject.R;
-import com.example.teacherstudentproject.Welcome.WelcomeActivity;
+import com.example.teacherstudentproject.welcome.WelcomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
