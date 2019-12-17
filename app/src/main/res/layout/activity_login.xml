@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="@string/submit"
             android:layout_marginTop="10dp"
-            android:background="@color/blue"
+            android:background="@drawable/roundedbutton_bg"
             android:textColor="@color/white"
             android:onClick="onClick"/>
 

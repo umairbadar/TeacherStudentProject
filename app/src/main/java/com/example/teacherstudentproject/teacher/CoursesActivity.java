@@ -131,10 +131,6 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void getSelectedCourses() {
-
-        progressBar.setVisibility(View.GONE);
-        recyclerView_selectedCourses.setVisibility(View.VISIBLE);
-
         StringRequest req = new StringRequest(Request.Method.POST, Api.SelectedCourses_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -144,7 +140,8 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
                             JSONObject jsonObject = new JSONObject(response);
                             boolean status = jsonObject.getBoolean("success");
                             if (status) {
-
+                                progressBar.setVisibility(View.GONE);
+                                recyclerView_selectedCourses.setVisibility(View.VISIBLE);
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);

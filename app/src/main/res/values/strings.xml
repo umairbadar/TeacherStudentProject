@@ -59,5 +59,6 @@
     <string name="selected_courses">Selected Courses</string>
     <string name="old_password">Old Password</string>
     <string name="save_list">Save list</string>
+    <string name="msg">Your course is added but it will be verified by the admin.</string>
 
 </resources>

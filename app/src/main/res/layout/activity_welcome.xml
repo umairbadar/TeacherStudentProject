@@ -15,7 +15,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/icon"
         tools:ignore="ContentDescription" />
 
     <Button
@@ -27,7 +27,7 @@
         android:layout_marginLeft="15dp"
         android:text="@string/login"
         android:onClick="onClick"
-        android:background="@color/blue"
+        android:background="@drawable/roundedbutton_bg"
         android:textColor="@color/white"/>
 
     <TextView
