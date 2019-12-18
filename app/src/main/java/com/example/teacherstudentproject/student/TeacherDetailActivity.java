@@ -5,10 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,7 +58,6 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
 
         Intent intent = getIntent();
         Teacher_ID = intent.getStringExtra("teacher_id");
-        //Toast.makeText(getApplicationContext(), intent.getStringExtra("teacher_id"), Toast.LENGTH_LONG).show();
     }
 
     private void initViews() {
@@ -80,6 +81,7 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
         //Checking if Internet is connected or not
         isNetworkAvailable();
     }
+
     private void isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -88,14 +90,14 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
             //Fetching Details of teacher
             getDetails();
         } else if (networkInfo == null) {
-            Toast.makeText(getApplicationContext(),R.string.no_internet_msg,
+            Toast.makeText(getApplicationContext(), R.string.no_internet_msg,
                     Toast.LENGTH_LONG).show();
         }
 
     }
 
 
-    private void getDirections(){
+    private void getDirections() {
         if (!lat.equals("") && !lng.equals("")) {
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                     Uri.parse("http://maps.google.com/maps?daddr=" + lat + "," + lng));
@@ -121,7 +123,7 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
                                 String name = innerObj.getString("firstname") + " " + innerObj.getString("lastname");
                                 tv_name.setText(name);
                                 tv_email.setText(innerObj.getString("email"));
-                                tv_phone.setText(innerObj.getString("telephone"));
+                                //tv_phone.setText(innerObj.getString("telephone"));
                                 tv_country.setText(innerObj.getString("country"));
                                 tv_city.setText(innerObj.getString("city"));
                                 tv_address.setText(innerObj.getString("address"));
@@ -130,9 +132,9 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
                                 tv_experience.setText(innerObj.getString("experience"));
                                 lat = innerObj.getString("latitude");
                                 lng = innerObj.getString("longitude");
-                                JSONArray jsonArray = innerObj.getJSONArray("activity_courses");
+                                JSONArray jsonArray = innerObj.getJSONArray("courses");
                                 StringBuilder stringBuilder = new StringBuilder();
-                                for (int i = 0; i < jsonArray.length(); i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject obj = jsonArray.getJSONObject(i);
                                     String course_name = obj.getString("name");
                                     stringBuilder.append(course_name);
@@ -175,11 +177,72 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
         requestQueue.add(req);
     }
 
+    private void openMessage(String phoneNumber) {
+
+        phoneNumber = phoneNumber.substring(1);
+
+        Uri sms_uri = Uri.parse("smsto:+" + getCountryZipCode() + phoneNumber);
+        Intent sms_intent = new Intent(Intent.ACTION_SENDTO, sms_uri);
+        //sms_intent.putExtra("sms_body", "Good Morning ! how r U ?");
+        startActivity(sms_intent);
+
+    }
+
+    private void openWhatsApp(String number, Context context) {
+
+        number = number.substring(1);
+
+        String url = "https://api.whatsapp.com/send?phone=+" + getCountryZipCode() + number;
+        try {
+            PackageManager pm = context.getPackageManager();
+            pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        } catch (PackageManager.NameNotFoundException e) {
+            Toast.makeText(TeacherDetailActivity.this, "Whatsapp not installed in your phone",
+                    Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    public String getCountryZipCode() {
+        String CountryID = "";
+        String CountryZipCode = "";
+
+        TelephonyManager manager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        //getNetworkCountryIso
+        CountryID = manager.getSimCountryIso().toUpperCase();
+        String[] rl = this.getResources().getStringArray(R.array.CountryCodes);
+        for (int i = 0; i < rl.length; i++) {
+            String[] g = rl[i].split(",");
+            if (g[1].trim().equals(CountryID.trim())) {
+                CountryZipCode = g[0];
+                break;
+            }
+        }
+        return CountryZipCode;
+    }
+
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.btn_get_directions) {
-            getDirections();
+        switch (v.getId()) {
+
+            case R.id.btn_get_directions:
+                getDirections();
+                break;
+
+            case R.id.fab_message:
+                openMessage(tv_phone.getText().toString().trim());
+                break;
+
+            case R.id.fab_whatsapp:
+                openWhatsApp(
+                        tv_phone.getText().toString().trim(),
+                        TeacherDetailActivity.this
+                );
+                break;
         }
     }
 }

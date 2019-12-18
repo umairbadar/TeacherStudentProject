@@ -48,7 +48,7 @@
             android:layout_marginTop="10dp"
             android:hint="@string/first_name"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:padding="10dp"
             android:autofillHints="@string/first_name" />
 
@@ -59,7 +59,7 @@
             android:layout_marginTop="10dp"
             android:hint="@string/last_name"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:padding="10dp"
             android:autofillHints="@string/last_name" />
 
@@ -125,7 +125,7 @@
             android:layout_marginTop="10dp"
             android:hint="@string/city"
             android:imeOptions="actionDone"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:padding="10dp"
             android:autofillHints="@string/city" />
 

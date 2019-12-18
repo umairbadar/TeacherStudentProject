@@ -3,17 +3,26 @@ package com.example.teacherstudentproject.teacher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -194,9 +203,7 @@ public class AddNewCourseActivity extends AppCompatActivity implements View.OnCl
                             boolean status = jsonObject.getBoolean("success");
                             if (status) {
                                 loader.dismiss();
-                                nextActivity();
-                                Toast.makeText(getApplicationContext(), R.string.msg,
-                                        Toast.LENGTH_LONG).show();
+                                showDialog(AddNewCourseActivity.this, "Hello, " + sharedPreferences.getString("firstname", ""));
                             } else {
                                 loader.dismiss();
                                 Toast.makeText(getApplicationContext(), jsonObject.getString("error"),
@@ -242,6 +249,30 @@ public class AddNewCourseActivity extends AppCompatActivity implements View.OnCl
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(req);
 
+    }
+
+    public void showDialog(final Context context, String msg) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.msg_dialog);
+
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
+
+        TextView tv_head = (TextView) dialog.findViewById(R.id.tv_head);
+        tv_head.setText(msg);
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextActivity();
+            }
+        });
+        dialog.show();
     }
 
     @Override
