@@ -22,9 +22,11 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.content.ContextCompat;
+
 import com.example.teacherstudentproject.R;
 
 import java.util.ArrayList;
@@ -184,29 +186,11 @@ public class MultiSpinnerSearch extends AppCompatSpinner implements OnCancelList
             public void afterTextChanged(Editable s) {
             }
         });
-        /*
-        Added Select all Dialog Button.
-         */
-        /*builder.setNeutralButton(android.R.string.selectAll, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                adapter.arrayList = adapter.mOriginalValues;
-                for (int i = 0; i < adapter.mOriginalValues.size(); i++) {
-                    adapter.arrayList.get(i).setSelected(true);
-                    //Log.i(TAG, adapter.mOriginalValues.get(i).getName());
-                }
-                adapter.notifyDataSetChanged();
-
-
-            }
-        });*/
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                //Log.i(TAG, " ITEMS : " + items.size());
                 dialog.cancel();
             }
         });

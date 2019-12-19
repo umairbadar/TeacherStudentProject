@@ -289,7 +289,14 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
                 Toast.makeText(getApplicationContext(), "Select Course Category",
                         Toast.LENGTH_LONG).show();
             }  else {
-                isNetworkAvailable();
+
+                if (spn_courses.getVisibility() == View.VISIBLE){
+                    isNetworkAvailable();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No Courses Found!",
+                            Toast.LENGTH_LONG).show();
+                }
+
             }
         }
     }
