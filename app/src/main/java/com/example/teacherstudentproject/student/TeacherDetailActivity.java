@@ -96,7 +96,6 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
 
     }
 
-
     private void getDirections() {
         if (!lat.equals("") && !lng.equals("")) {
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
@@ -123,7 +122,7 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
                                 String name = innerObj.getString("firstname") + " " + innerObj.getString("lastname");
                                 tv_name.setText(name);
                                 tv_email.setText(innerObj.getString("email"));
-                                //tv_phone.setText(innerObj.getString("telephone"));
+                                tv_phone.setText(innerObj.getString("telephone"));
                                 tv_country.setText(innerObj.getString("country"));
                                 tv_city.setText(innerObj.getString("city"));
                                 tv_address.setText(innerObj.getString("address"));
