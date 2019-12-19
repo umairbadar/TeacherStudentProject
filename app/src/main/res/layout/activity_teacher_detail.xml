@@ -232,9 +232,9 @@
                 android:id="@+id/tv_experience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tv_border"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:background="@drawable/tv_border"
                 android:paddingStart="10dp"
                 android:paddingEnd="5dp"
                 android:text="@string/_4_years"
@@ -257,63 +257,65 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/tv_border"
                 android:paddingStart="10dp"
                 android:paddingEnd="5dp"
                 android:text="@string/maths_english"
                 android:textSize="18sp" />
 
-
-            <Button
-                android:id="@+id/btn_get_directions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/roundedbutton_bg"
-                android:onClick="onClick"
-                android:text="@string/get_directions"
-                android:textColor="@color/white" />
-
         </LinearLayout>
 
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fab_getDirections"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/fab_message"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="0dp"
+        android:onClick="onClick"
+        android:src="@drawable/ic_map"
+        app:backgroundTint="#038A7D"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fab_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:elevation="0dp"
-        app:backgroundTint="@color/blue"
-        android:src="@drawable/ic_message"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
         android:layout_above="@id/fab_whatsapp"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="15dp"
+        android:layout_gravity="end"
         android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="onClick"/>
+        android:elevation="0dp"
+        android:onClick="onClick"
+        android:src="@drawable/ic_message"
+        app:backgroundTint="@color/blue"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fab_whatsapp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:backgroundTint="@color/whatsapp_bg"
-        android:src="@drawable/ic_whatsapp"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
-        android:onClick="onClick"/>
+        android:elevation="0dp"
+        android:onClick="onClick"
+        android:src="@drawable/ic_whatsapp"
+        app:backgroundTint="@color/whatsapp_bg"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
 
 </RelativeLayout>

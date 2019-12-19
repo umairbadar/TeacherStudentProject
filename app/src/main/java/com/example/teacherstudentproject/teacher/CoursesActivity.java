@@ -12,7 +12,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -23,12 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.androidbuts.multispinnerfilter.KeyPairBoolData;
-import com.androidbuts.multispinnerfilter.MultiSpinnerSearch;
-import com.androidbuts.multispinnerfilter.SpinnerListener;
 import com.example.teacherstudentproject.endpoints.Api;
 import com.example.teacherstudentproject.R;
-import com.example.teacherstudentproject.login.LoginActivity;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONArray;

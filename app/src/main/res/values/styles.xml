@@ -15,4 +15,7 @@
 
     </style>
 
+    <style name="myDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+    </style>
+
 </resources>

@@ -228,7 +228,7 @@ public class TeacherDetailActivity extends AppCompatActivity implements View.OnC
 
         switch (v.getId()) {
 
-            case R.id.btn_get_directions:
+            case R.id.fab_getDirections:
                 getDirections();
                 break;
 

@@ -95,7 +95,7 @@
             android:textSize="24sp"
             android:typeface="serif" />
 
-        <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
+        <com.example.teacherstudentproject.teacher.MultiSpinnerSearch
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"

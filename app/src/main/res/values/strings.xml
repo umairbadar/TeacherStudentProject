@@ -56,12 +56,14 @@
     <string name="add_new_course">Add New Course</string>
     <string name="subject_name">Subject Name</string>
     <string name="course_name">Course Name</string>
-    <string name="selected_courses">Selected Courses</string>
+    <string name="selected_courses">My Courses</string>
     <string name="old_password">Old Password</string>
     <string name="save_list">Save list</string>
     <string name="msg">Your newly added course is pending for approval. It will be available for selection once approved.</string>
     <string name="message">Message</string>
     <string name="okay">OK</string>
+
+    <string name="type_to_search">Type to Search</string>
 
     <string-array name="CountryCodes" >
         <item>93,AF</item>
