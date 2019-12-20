@@ -126,13 +126,13 @@ public class MultiSpinnerSearch extends AppCompatSpinner implements OnCancelList
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).isSelected()) {
                 spinnerBuffer.append(items.get(i).getName());
-                spinnerBuffer.append(", ");
+                spinnerBuffer.append(",");
             }
         }
 
         String spinnerText = spinnerBuffer.toString();
         if (spinnerText.length() > 2)
-            spinnerText = spinnerText.substring(0, spinnerText.length() - 2);
+            spinnerText = spinnerText.substring(0, spinnerText.length() - 1);
         else
             spinnerText = this.getHintText();
 
@@ -212,11 +212,11 @@ public class MultiSpinnerSearch extends AppCompatSpinner implements OnCancelList
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).isSelected()) {
                 spinnerBuffer.append(items.get(i).getName());
-                spinnerBuffer.append(", ");
+                spinnerBuffer.append(",");
             }
         }
         if (spinnerBuffer.length() > 2)
-            defaultText = spinnerBuffer.toString().substring(0, spinnerBuffer.toString().length() - 2);
+            defaultText = spinnerBuffer.toString().substring(0, spinnerBuffer.toString().length() - 1);
 
         ArrayAdapter<String> adapterSpinner = new ArrayAdapter<>(getContext(), R.layout.textview_for_spinner, new String[]{defaultText});
         setAdapter(adapterSpinner);

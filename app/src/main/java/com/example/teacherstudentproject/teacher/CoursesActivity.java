@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -57,6 +58,8 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
 
     //Loader
     private KProgressHUD loader;
+
+    private TextView tv_error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,9 +127,12 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
                         .getSelectedIds()
                         .toString()
                         .replace("[", "")
-                        .replace("]", "");
+                        .replace("]", "")
+                        .replace(", ", ",");
             }
         });
+
+        tv_error = findViewById(R.id.tv_error);
     }
 
     private void getSelectedCourses() {
@@ -139,6 +145,7 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
                             JSONObject jsonObject = new JSONObject(response);
                             boolean status = jsonObject.getBoolean("success");
                             if (status) {
+                                tv_error.setVisibility(View.GONE);
                                 progressBar.setVisibility(View.GONE);
                                 recyclerView_selectedCourses.setVisibility(View.VISIBLE);
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -165,8 +172,9 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
                                 adapter.notifyDataSetChanged();
 
                             } else {
-                                Toast.makeText(getApplicationContext(), jsonObject.getString("error"),
-                                        Toast.LENGTH_LONG).show();
+                                recyclerView_selectedCourses.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
+                                tv_error.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -258,7 +266,18 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
         loader.show();
 
         pre_selected_ids = "";
-        pre_selected_ids = list_ids.toString().replace("[", "").replace("]", "");
+        pre_selected_ids = list_ids.toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replace(", ", ",");
+
+        String all_ids = "";
+        if (!pre_selected_ids.equals("")){
+            all_ids = id + "," + pre_selected_ids;
+        } else {
+            all_ids = id;
+        }
+        final String finalAll_ids = all_ids;
 
         StringRequest req = new StringRequest(Request.Method.POST, Api.UpdateProfile_URL,
                 new Response.Listener<String>() {
@@ -307,13 +326,16 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
                 map.put("city", sharedPreferences.getString("city", ""));
                 map.put("country_id", sharedPreferences.getString("country_id", ""));
                 map.put("zone_id", sharedPreferences.getString("zone_id", ""));
-                map.put("courses", pre_selected_ids + "," + id);
+                map.put("courses", finalAll_ids);
                 return map;
             }
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(req);
+
+        /*final String final_id = id.trim() *//*+ "," + pre_selected_ids*//*;
+        Toast.makeText(getApplicationContext(), final_id, Toast.LENGTH_LONG).show();*/
     }
 
     @Override
@@ -324,7 +346,7 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
 
     private void deleteCourse() {
 
-        if (!list_ids.toString().equals("[]")) {
+        //if (!list_ids.toString().equals("[]")) {
             StringRequest req = new StringRequest(Request.Method.POST, Api.UpdateProfile_URL,
                     new Response.Listener<String>() {
                         @Override
@@ -378,10 +400,10 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             requestQueue.add(req);
 
-        } else {
+        /*} else {
             Toast.makeText(getApplicationContext(), "List Empty!",
                     Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     @Override

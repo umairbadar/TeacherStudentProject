@@ -64,6 +64,7 @@
     <string name="okay">OK</string>
 
     <string name="type_to_search">Type to Search</string>
+    <string name="no_courses_selected">No courses selected</string>
 
     <string-array name="CountryCodes" >
         <item>93,AF</item>

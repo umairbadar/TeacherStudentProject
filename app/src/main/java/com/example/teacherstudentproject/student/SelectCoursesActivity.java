@@ -177,6 +177,7 @@ public class SelectCoursesActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Course_ID = arr_courses_id.get(position);
+                Toast.makeText(getApplicationContext(), Course_ID, Toast.LENGTH_LONG).show();
             }
 
             @Override
