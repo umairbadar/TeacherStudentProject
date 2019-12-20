@@ -22,7 +22,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.content.ContextCompat;
@@ -33,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultiSpinnerSearch extends AppCompatSpinner implements OnCancelListener {
+
     private static final String TAG = MultiSpinnerSearch.class.getSimpleName();
 
     public static AlertDialog.Builder builder;
@@ -244,7 +244,7 @@ public class MultiSpinnerSearch extends AppCompatSpinner implements OnCancelList
     public class MyAdapter extends BaseAdapter implements Filterable {
 
         List<KeyPairBoolData> arrayList;
-        List<KeyPairBoolData> mOriginalValues; // Original Values
+        List<KeyPairBoolData> mOriginalValues; //Original Values
         LayoutInflater inflater;
 
         MyAdapter(Context context, List<KeyPairBoolData> arrayList) {

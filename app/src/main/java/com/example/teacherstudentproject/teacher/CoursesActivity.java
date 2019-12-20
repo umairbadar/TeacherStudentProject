@@ -120,7 +120,11 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
             public void onItemsSelected(List<KeyPairBoolData> items) {
 
                 id = "";
-                id = searchSpinner.getSelectedIds().toString().replace("[", "").replace("]", "");
+                id = searchSpinner
+                        .getSelectedIds()
+                        .toString()
+                        .replace("[", "")
+                        .replace("]", "");
             }
         });
     }
