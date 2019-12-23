@@ -347,58 +347,58 @@ public class CoursesActivity extends AppCompatActivity implements View.OnClickLi
     private void deleteCourse() {
 
         //if (!list_ids.toString().equals("[]")) {
-            StringRequest req = new StringRequest(Request.Method.POST, Api.UpdateProfile_URL,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                boolean status = jsonObject.getBoolean("success");
-                                if (status) {
-                                    refreshActivity();
-                                    Toast.makeText(getApplicationContext(), "Courses Updated!",
-                                            Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), jsonObject.getString("error"),
-                                            Toast.LENGTH_LONG).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+        StringRequest req = new StringRequest(Request.Method.POST, Api.UpdateProfile_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean status = jsonObject.getBoolean("success");
+                            if (status) {
+                                refreshActivity();
+                                Toast.makeText(getApplicationContext(), "Courses Updated!",
+                                        Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), jsonObject.getString("error"),
+                                        Toast.LENGTH_LONG).show();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), error.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> map = new HashMap<String, String>();
-                    map.put("user_id", CoursesActivity.sharedPreferences.getString("customer_id", ""));
-                    map.put("firstname", CoursesActivity.sharedPreferences.getString("firstname", ""));
-                    map.put("lastname", CoursesActivity.sharedPreferences.getString("lastname", ""));
-                    map.put("email", CoursesActivity.sharedPreferences.getString("email", ""));
-                    map.put("telephone", CoursesActivity.sharedPreferences.getString("telephone", ""));
-                    map.put("address_id", CoursesActivity.sharedPreferences.getString("address_id", ""));
-                    map.put("address_1", CoursesActivity.sharedPreferences.getString("address", ""));
-                    map.put("latitude", CoursesActivity.sharedPreferences.getString("latitude", ""));
-                    map.put("longitude", CoursesActivity.sharedPreferences.getString("longitude", ""));
-                    map.put("city", CoursesActivity.sharedPreferences.getString("city", ""));
-                    map.put("country_id", CoursesActivity.sharedPreferences.getString("country_id", ""));
-                    map.put("zone_id", CoursesActivity.sharedPreferences.getString("zone_id", ""));
-                    map.put("courses", list_ids.toString()
-                            .replace("[", "")
-                            .replace("]", "")
-                    );
-                    return map;
-                }
-            };
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("user_id", CoursesActivity.sharedPreferences.getString("customer_id", ""));
+                map.put("firstname", CoursesActivity.sharedPreferences.getString("firstname", ""));
+                map.put("lastname", CoursesActivity.sharedPreferences.getString("lastname", ""));
+                map.put("email", CoursesActivity.sharedPreferences.getString("email", ""));
+                map.put("telephone", CoursesActivity.sharedPreferences.getString("telephone", ""));
+                map.put("address_id", CoursesActivity.sharedPreferences.getString("address_id", ""));
+                map.put("address_1", CoursesActivity.sharedPreferences.getString("address", ""));
+                map.put("latitude", CoursesActivity.sharedPreferences.getString("latitude", ""));
+                map.put("longitude", CoursesActivity.sharedPreferences.getString("longitude", ""));
+                map.put("city", CoursesActivity.sharedPreferences.getString("city", ""));
+                map.put("country_id", CoursesActivity.sharedPreferences.getString("country_id", ""));
+                map.put("zone_id", CoursesActivity.sharedPreferences.getString("zone_id", ""));
+                map.put("courses", list_ids.toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                );
+                return map;
+            }
+        };
 
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(req);
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(req);
 
         /*} else {
             Toast.makeText(getApplicationContext(), "List Empty!",
