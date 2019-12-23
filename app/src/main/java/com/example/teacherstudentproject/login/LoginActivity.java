@@ -58,8 +58,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //Initializing Views
         initViews();
-        
-        Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_LONG).show();
     }
 
     private void initViews() {
